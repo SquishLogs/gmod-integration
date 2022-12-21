@@ -38,6 +38,14 @@ hook.Add("PlayerInitialSpawn", "SquishLogs:Player", function(ply)
     SquishLogs.Core.RegisterPlayer(ply)
 end)
 
+
+// Set all current logs for this server as archived
+function SquishLogs.Core.Archive()
+    SquishLogs.Socket.Send({
+        type = "archive"
+    })
+end
+
 // Used to upsert the player
 function SquishLogs.Core.RegisterPlayer(ply)
     if (!IsValid(ply) or !ply:IsPlayer()) then return end
@@ -49,4 +57,14 @@ function SquishLogs.Core.RegisterPlayer(ply)
             platform_id = ply:SteamID64()
         }
     })
+end
+
+// Send a simple log
+function SquishLogs.Core.SimpleLog(message, category)
+    if (!message) then return end
+
+    SquishLog:New()
+        :SetCategory(category or "System")
+        :AddFragment(message)
+        :Send()
 end

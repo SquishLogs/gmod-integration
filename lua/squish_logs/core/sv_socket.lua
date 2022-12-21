@@ -23,6 +23,9 @@ function SquishLogs.Socket.StartConnection()
 			community = SquishLogs.Info.Community,
 			token = SquishLogs.Info.Token
 		})
+
+		SquishLogs.Core.Archive()
+		SquishLogs.Core.SimpleLog("Server started")
 	end
 	function SquishLogs.Socket.Connection:onDisconnected()
 		print("[Squish Logs]", "WebSocket disconnected")
