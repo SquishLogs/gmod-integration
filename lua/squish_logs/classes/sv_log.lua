@@ -53,7 +53,7 @@ function SquishLog:AddFragment(fragment)
                 }
             }
         }
-    elseif (fragType == "string") then
+    elseif ((fragType == "string") or (fragType == "number")) then
         data = {
             type = "text",
             data = {
@@ -62,11 +62,12 @@ function SquishLog:AddFragment(fragment)
             }
         }
     else
-        print("[Squish Logs]", "Log received bad data. Aborting.")
+        print("[Squish Logs]", "Log received bad data. Aborting.", fragType)
         return
     end
 
     table.insert(self.log, data)
+    self._color = null;
 
     return self
 end
