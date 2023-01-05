@@ -7,7 +7,7 @@ function SquishLogs.Socket.StartConnection()
 		SquishLogs.Socket.Connection:closeNow()
 	end
 
-	SquishLogs.Socket.Connection = GWSockets.createWebSocket("ws://" .. SquishLogs.Server.socket.ip_address, false)
+	SquishLogs.Socket.Connection = GWSockets.createWebSocket(SquishLogs.Server.socket.ip_address, false)
 
 	function SquishLogs.Socket.Connection:onMessage(txt)
 	end

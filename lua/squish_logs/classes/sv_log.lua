@@ -67,7 +67,7 @@ function SquishLog:AddFragment(fragment)
     end
 
     table.insert(self.log, data)
-    self._color = null;
+    self._color = nil;
 
     return self
 end
