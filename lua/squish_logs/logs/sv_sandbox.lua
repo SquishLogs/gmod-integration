@@ -12,7 +12,7 @@ hook.Add("PlayerSpawnedProp", "SquishLogs:Log:Sandbox:Spawn", function(ply, mode
         :Send()
 end)
 
-hook.Add("CanTool", "xLogsSandbox-Toolgun", function(ply, tr, tool)
+hook.Add("CanTool", "SquishLogs:Log:Sandbox:Toolgun", function(ply, tr, tool)
 	if not IsValid(ply) or not ply:IsPlayer() then return end
     
     SquishLog:New()
