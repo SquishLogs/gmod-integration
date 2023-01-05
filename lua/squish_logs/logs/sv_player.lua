@@ -57,7 +57,7 @@ hook.Add("PlayerCanPickupWeapon", "SquishLogs:Log:Player:WeaponPickup", function
         :Send()
 end)
 
-hook.Add("PlayerCanPickupItem", "xLogsPlayers-Pickup", function(ply, item)
+hook.Add("PlayerCanPickupItem", "SquishLogs:Log:Player:ItemPickup", function(ply, item)
     SquishLog:New()
         :SetCategory("Player | Weapon Pickup")
         :AddFragment(ply)
