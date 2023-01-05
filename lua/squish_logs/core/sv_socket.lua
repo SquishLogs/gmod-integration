@@ -33,7 +33,6 @@ function SquishLogs.Socket.StartConnection()
 	end
 	
 	function SquishLogs.Socket.Send(data)
-		print('SquishLogs.Socket.Send')
 		SquishLogs.Socket.Connection:write(util.TableToJSON(data))
 	end
 

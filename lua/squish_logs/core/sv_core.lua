@@ -11,7 +11,6 @@ hook.Add("InitPostEntity", "SquishLogs:Start", function()
             end
     
             print("[Squish Logs]", "Successfuly found server")
-            print('body', body)
             if (!body) then
                 print("[Squish Logs]", "Permission granted but returned result was unexpected. Aborting.")
                 return

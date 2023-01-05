@@ -5,10 +5,10 @@ SquishLogs.Core = {}
 
 print("Loading Squish Logs")
 
-SquishLogs.Info.Version = "1"
-SquishLogs.Info.Community = "xyz"
-SquishLogs.Info.Domain = "http://xyz.localhost"
-SquishLogs.Info.Token = "McH1XtqZHMx6hscgQ5lOa90P6oGaaGMa"
+SquishLogs.Info.Version = "0.1"
+SquishLogs.Info.Community = "{{ community_name }}"
+SquishLogs.Info.Domain = "{{ community_domain }}"
+SquishLogs.Info.Token = "{{ server_token }}"
 
 local path = "squish_logs/"
 if (SERVER) then
