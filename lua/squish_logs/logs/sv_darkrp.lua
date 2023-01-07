@@ -92,8 +92,6 @@ hook.Add("playerBoughtDoor", "SquishLogs:Log:DarkRP:Door", function(ply, ent, co
         :SetCategory("DarkRP | Door")
         :AddFragment(ply)
         :AddFragment(' purchased a door for ')
-        :AddFragment(ply2)
-        :AddFragment(' for ')
         :SetFragmentColor(colorGreen)
         :AddFragment(DarkRP.formatMoney(cost))
         :Send()
@@ -167,7 +165,7 @@ hook.Add("removeLaw", "SquishLogs:Log:DarkRP:Law", function(index, law)
 end)
 
 hook.Add("lockpickStarted", "SquishLogs:Log:DarkRP:Lockpick", function(ply, ent)
-	if not IsValid(ply) or not ply:IsPlayer() then return end
+	if (not IsValid(ply)) or (not ply:IsPlayer()) or (not IsValid(ent)) then return end
 
     local log =SquishLog:New()
         :SetCategory("DarkRP | Lockpick")
