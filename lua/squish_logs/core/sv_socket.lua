@@ -2,6 +2,7 @@ require("gwsockets")
 
 
 local firstConnect = false
+local freezer = {}
 function SquishLogs.Socket.StartConnection()
 	print("[Squish Logs]", "Starting websocket connection")
 
@@ -23,8 +24,15 @@ function SquishLogs.Socket.StartConnection()
 		if (!response.type or !(response.type == 'auth-response')) then return end
 		if (!response.success) then return end
 
+		SquishLogs.Core.IsAuthed = true
+
 		SquishLogs.Core.Archive()
 		SquishLogs.Core.SimpleLog("Server started")
+
+		for k, v in ipairs(freezer) do
+			PrintTable(v)
+			SquishLogs.Socket.Send(v)
+		end
 	end
 	
 	function SquishLogs.Socket.Connection:onError(txt)
@@ -37,14 +45,23 @@ function SquishLogs.Socket.StartConnection()
 			type = "auth",
 			community = SquishLogs.Info.Community,
 			token = SquishLogs.Info.Token
-		})
+		}, true)
 	end
 	function SquishLogs.Socket.Connection:onDisconnected()
 		print("[Squish Logs]", "WebSocket disconnected")
 		SquishLogs.Socket.StartConnection()
 	end
 	
-	function SquishLogs.Socket.Send(data)
+	function SquishLogs.Socket.Send(data, bypassFreezer)
+		// In some cases, the server may not be authed when logs are coming in.
+		// To prevent losing data, we add them to the freezer and send them off
+		// once auth is complete.
+		if (!SquishLogs.Core.IsAuthed and !bypassFreezer) then
+			table.insert(freezer, data)
+
+			return
+		end
+
 		SquishLogs.Socket.Connection:write(util.TableToJSON(data))
 	end
 
