@@ -3,12 +3,9 @@ SquishLogs.Info = {}
 SquishLogs.Socket = {}
 SquishLogs.Core = {}
 
-print("Loading Squish Logs")
+SquishLogs.Info.Version = "0.3"
 
-SquishLogs.Info.Version = "0.2"
-SquishLogs.Info.Community = "{{ community_name }}"
-SquishLogs.Info.Domain = "{{ community_domain }}"
-SquishLogs.Info.Token = "{{ server_token }}"
+print("Loading Squish Logs")
 
 local path = "squish_logs/"
 if (SERVER) then
