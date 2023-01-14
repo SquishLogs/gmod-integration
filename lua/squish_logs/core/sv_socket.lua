@@ -63,6 +63,8 @@ function SquishLogs.Socket.StartConnection()
 		end
 
 		SquishLogs.Socket.Connection:write(util.TableToJSON(data))
+
+		hook.Run('SquishLogs:Send', data)
 	end
 
 	print("[Squish Logs]", "Attempting to connect to", SquishLogs.Server.socket.name)
