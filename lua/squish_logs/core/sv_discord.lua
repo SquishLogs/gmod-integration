@@ -36,7 +36,7 @@ hook.Add('SquishLogs:Send', 'SquishLogs:Discord', function(data)
             // Add the user's data to the fields
             table.insert(log.fields, {
                 name = v.data.name,
-                value = "Health: "..v.data.health.." | Weapon: "..(v.data.weapon and v.data.weapon.name or "Unknown").." | Team: "..(v.data.team and v.data.team.name or "Unknown")
+                value = "Health: "..v.data.health.." | Weapon: "..(v.data.weapon and v.data.weapon.name or "Unknown").." | Team: "..(v.data.team and v.data.team.name or "Unknown").." | ID: "..v.data.platform_id
             })
         end
     end
