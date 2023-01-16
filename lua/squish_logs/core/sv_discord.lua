@@ -46,7 +46,7 @@ hook.Add('SquishLogs:Send', 'SquishLogs:Discord', function(data)
         headers = {
             ["User-Agent"] = "GarrysMod/SquishLogs",
             ["Content-Type"] = "application/json"
-        }
+        },
         url = SquishLogs.Server.discord_webhook,
         body = util.TableToJSON({embeds = {log}}),
     })
