@@ -32,6 +32,8 @@ end
 
 // Log
 function SquishLog:AddFragment(fragment)
+    if (!fragment) then return self end
+    
     local fragType = type(fragment)
     local data = {};
 
