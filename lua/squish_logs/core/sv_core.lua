@@ -70,9 +70,9 @@ end
 
 util.AddNetworkString("SquishLogs:Command")
 
-hook.Add("PlayerSay", "SquishLogs:Log:Player:Say", function(ply, text)
+hook.Add("PlayerSay", "SquishLogs:ChatCommand", function(ply, text)
     if (!(string.lower(text) == "!logs")) then return end
-    
+
     net.Start("SquishLogs:Command")
     net.Send(ply)
 end)
