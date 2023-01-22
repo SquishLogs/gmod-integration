@@ -182,7 +182,7 @@ hook.Add("lockpickStarted", "SquishLogs:Log:DarkRP:Lockpick", function(ply, ent)
         log = log:AddFragment(ent:GetClass())
 	end
 
-    log:send()
+    log:Send()
 end)
 
 hook.Add("onLockpickCompleted", "SquishLogs:Log:DarkRP:Lockpick", function(ply, success, ent)
@@ -204,7 +204,7 @@ hook.Add("onLockpickCompleted", "SquishLogs:Log:DarkRP:Lockpick", function(ply, 
         log = log:AddFragment(ent:GetClass())
 	end
 
-    log:send()
+    log:Send()
 end)
 
 hook.Add("playerBoughtCustomEntity", "SquishLogs:Log:DarkRP:Economy", function(ply, entTable, ent, price)
