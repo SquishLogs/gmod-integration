@@ -9,10 +9,6 @@ hook.Add("PostLoadData", "Squish_Logs_Helix_Int", function()
 
     local HANDLER = {}
 
-    function HANDLER.Load()
-        print("Helix Squish_Logs is Started")
-    end
-
     function HANDLER.Write(client, message)
         SquishLog:New()
         :SetCategory("Helix")
