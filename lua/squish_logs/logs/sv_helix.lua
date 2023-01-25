@@ -9,7 +9,8 @@ hook.Add("PostLoadData", "Squish_Logs_Helix_Int", function()
 
     function HANDLER.Write(client, message, logFlag, logType)
         local chartxt = ""
-        if IsValid(client:GetCharacter()) then
+
+        if client:GetCharacter() then
             chartxt = " CharID ".. client:GetCharacter():GetID()
         end
 
