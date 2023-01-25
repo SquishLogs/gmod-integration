@@ -9,11 +9,14 @@ hook.Add("PostLoadData", "Squish_Logs_Helix_Int", function()
 
     local HANDLER = {}
 
-    function HANDLER.Write(client, message)
+    function HANDLER.Write(client, message, logFlag, logType)
+
         SquishLog:New()
-        :SetCategory("Helix")
+        :SetCategory("Helix | " .. logType)
         :AddFragment(client)
-        :AddFragment( " " .. message)
+        :AddFragment( " " .. string.gsub(message, client:Nick(), ""))
+        :SetFragmentColor(colorYellow)
+        :AddFragment( " CharID " .. client:GetCharacter():GetID())
         :Send()
     end
 
