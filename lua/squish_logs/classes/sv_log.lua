@@ -81,6 +81,10 @@ end
 
 // Send the log
 function SquishLog:Send()
+    // Connection timed out or something, reconnect.
+    if (!SquishLogs.Socket.Connection) then SquishLogs.Socket.StartConnection() end
+    
+    // Send off the log
     SquishLogs.Socket.Send({
         type = "log",
         category = self.category,

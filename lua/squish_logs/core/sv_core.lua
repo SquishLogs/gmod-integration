@@ -23,7 +23,7 @@ hook.Add("InitPostEntity", "SquishLogs:Start", function()
             end
     
             SquishLogs.Server = json
-            SquishLogs.Socket.StartConnection(location)
+            SquishLogs.Socket.StartConnection()
         end, function(error)
             print("[Squish Logs]", "Failed to find server")
             print(error)

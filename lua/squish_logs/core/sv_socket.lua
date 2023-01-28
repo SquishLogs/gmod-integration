@@ -2,6 +2,7 @@ require("gwsockets")
 
 
 local firstConnect = false
+local isConnected = false
 local freezer = {}
 function SquishLogs.Socket.StartConnection()
 	print("[Squish Logs]", "Starting websocket connection")
@@ -30,7 +31,6 @@ function SquishLogs.Socket.StartConnection()
 		SquishLogs.Core.SimpleLog("Server started")
 
 		for k, v in ipairs(freezer) do
-			PrintTable(v)
 			SquishLogs.Socket.Send(v)
 		end
 	end
@@ -41,6 +41,8 @@ function SquishLogs.Socket.StartConnection()
 	
 	function SquishLogs.Socket.Connection:onConnected()
 		print("[Squish Logs]", "Connection made, attempting to auth as server")
+		isConnected = true
+
 		SquishLogs.Socket.Send({
 			type = "auth",
 			community = SquishLogs.Info.Community,
@@ -49,16 +51,24 @@ function SquishLogs.Socket.StartConnection()
 	end
 	function SquishLogs.Socket.Connection:onDisconnected()
 		print("[Squish Logs]", "WebSocket disconnected")
-		SquishLogs.Socket.StartConnection()
+		isConnected = false
+		//SquishLogs.Socket.StartConnection()
 	end
 	
 	function SquishLogs.Socket.Send(data, bypassFreezer)
+		// Connection timed out or something, reconnect.
+		if (!isConnected) then
+			table.insert(freezer, data)
+
+			SquishLogs.Socket.StartConnection()
+		end
+
+
 		// In some cases, the server may not be authed when logs are coming in.
 		// To prevent losing data, we add them to the freezer and send them off
 		// once auth is complete.
 		if (!SquishLogs.Core.IsAuthed and !bypassFreezer) then
 			table.insert(freezer, data)
-
 			return
 		end
 
