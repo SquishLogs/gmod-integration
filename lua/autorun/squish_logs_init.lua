@@ -3,7 +3,7 @@ SquishLogs.Info = {}
 SquishLogs.Socket = {}
 SquishLogs.Core = {}
 
-SquishLogs.Info.Version = "1.0.4"
+SquishLogs.Info.Version = "1.0.5"
 SquishLogs.Info.Domain = "{{ community_domain }}"
 
 print("Loading Squish Logs")
