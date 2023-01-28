@@ -1,11 +1,19 @@
-require("reqwest")
-
-// Reqwest is not installed, we can't do Discord integration
-if (!reqwest) then return end
-
 hook.Add('SquishLogs:Send', 'SquishLogs:Discord', function(data)
     if (!data or !(data.type == 'log')) then return end
     if (!SquishLogs.Server.discord_webhook) then return end
+
+    if(!reqwest) then 
+        if(!util.IsBinaryModuleInstalled("reqwest")) then
+            print("reqwest is not installed! This module is required for discord webhooks!")
+            print("Without it, your discord webhook will not work!")
+            print("Get it here: https://github.com/WilliamVenner/gmsv_reqwest")
+            print("More information here: https://docs.squish.wtf/garrys-mod/discord-integration")
+            
+            hook.Remove("SquishLogs:Send", "SquishLogs:Discord")
+            return
+        end
+        require("reqwest")
+    end
 
     // Get the color in annoying Discord required format :)
     if (!SquishLogs.Server.color_discord) then
