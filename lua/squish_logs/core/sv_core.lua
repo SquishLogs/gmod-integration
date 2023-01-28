@@ -1,7 +1,7 @@
 // Start the system
 hook.Add("InitPostEntity", "SquishLogs:Start", function()
     hook.Remove("InitPostEntity", "SquishLogs:Start")
-    timer.Simple(2, function() // God am I happy I don't do this shit on a daily basis
+    timer.Simple(2, function() // God am I happy I don't do this shit on a daily basis anymore
         print("[Squish Logs]", "Attempting to find connection data")
     
         http.Fetch(SquishLogs.Info.Domain .. '/api/v1/server', function(body, _, _, code)
@@ -30,6 +30,18 @@ hook.Add("InitPostEntity", "SquishLogs:Start", function()
         end, {
             ['X-Game-Server-Token'] = SquishLogs.Info.Token
         })
+
+        http.Fetch("https://raw.githubusercontent.com/SquishLogs/gmod-integration/main/version", function(body, _, _, code)
+            if (!(code == 200)) then
+                print("[Squish Logs]", "Invalid response code, aborting", code)
+                return
+            end
+
+            if (!(SquishLogs.Info.Version == body)) then
+                print('body', body)
+                SquishLogs.Info.LatestVersion = body
+            end
+        end)
     end)
 end)
 
@@ -48,6 +60,10 @@ end
 // Used to upsert the player
 function SquishLogs.Core.RegisterPlayer(ply)
     if (!IsValid(ply) or !ply:IsPlayer()) then return end
+
+    if (SquishLogs.Info.LatestVersion) then
+        print("[Squish Logs]", "You are running an out of date version of this integration, please update as soon as possible")
+    end
 
     SquishLogs.Socket.Send({
         type = "player",
