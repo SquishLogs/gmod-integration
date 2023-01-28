@@ -3,7 +3,9 @@ local colorGreen = Color(34,139,34)
 local colorRed = Color(200, 0, 0)
 local colorBlue = Color(29, 97, 129)
 
-hook.Add("PostLoadData", "Squish_Logs_Helix_Int", function()
+hook.Add("PostLoadData", "SquishLogs:Log:Helix", function()
+    // Check that Helix is installed
+    if (!ix) then return end
 
     local HANDLER = {}
 
@@ -24,5 +26,4 @@ hook.Add("PostLoadData", "Squish_Logs_Helix_Int", function()
     end
 
     ix.log.RegisterHandler("Squish_Logs", HANDLER)
-
 end)
