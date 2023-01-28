@@ -5,7 +5,7 @@ local colorBlue = Color(29, 97, 129)
 
 hook.Add("PostLoadData", "SquishLogs:Log:Helix", function()
     // Check that Helix is installed
-    if (!ix) then return end
+    if (!ix or !ix.log) then return end
 
     local HANDLER = {}
 
