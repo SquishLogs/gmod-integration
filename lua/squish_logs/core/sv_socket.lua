@@ -1,5 +1,10 @@
+if(!util.IsBinaryModuleInstalled("gwsockets")) then
+    print("gwsockets is not installed! THIS MODULE IS REQUIRED!")
+    print("Without it, your logs will not work!")
+    print("Get it here: https://github.com/FredyH/GWSockets")
+    print("More information here: https://docs.squish.wtf/garrys-mod/installation-setup")
+end
 require("gwsockets")
-
 
 local firstConnect = false
 local isConnected = false
