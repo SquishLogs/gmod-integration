@@ -17,12 +17,12 @@ hook.Add("PostLoadData", "SquishLogs:Log:Helix", function()
         end
 
         SquishLog:New()
-        :SetCategory("Helix | " .. logType)
-        :AddFragment(client)
-        :AddFragment( " " .. string.gsub(message, client:Nick(), ""))
-        :SetFragmentColor(colorYellow)
-        :AddFragment( chartxt )
-        :Send()
+            :SetCategory("Helix | " .. logType)
+            :AddFragment(client)
+            :AddFragment( " " .. string.gsub(message, client:Nick(), ""))
+            :SetFragmentColor(colorYellow)
+            :AddFragment(chartxt)
+            :Send()
     end
 
     ix.log.RegisterHandler("Squish_Logs", HANDLER)
