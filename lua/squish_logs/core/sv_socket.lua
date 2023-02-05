@@ -59,29 +59,31 @@ function SquishLogs.Socket.StartConnection()
 		isConnected = false
 		//SquishLogs.Socket.StartConnection()
 	end
-	
-	function SquishLogs.Socket.Send(data, bypassFreezer)
-		// Connection timed out or something, reconnect.
-		if (!isConnected) then
-			table.insert(freezer, data)
-
-			SquishLogs.Socket.StartConnection()
-		end
-
-
-		// In some cases, the server may not be authed when logs are coming in.
-		// To prevent losing data, we add them to the freezer and send them off
-		// once auth is complete.
-		if (!SquishLogs.Core.IsAuthed and !bypassFreezer) then
-			table.insert(freezer, data)
-			return
-		end
-
-		SquishLogs.Socket.Connection:write(util.TableToJSON(data))
-
-		hook.Run('SquishLogs:Send', data)
-	end
 
 	print("[Squish Logs]", "Attempting to connect to", SquishLogs.Server.socket.name)
 	SquishLogs.Socket.Connection:open()
+end
+	
+function SquishLogs.Socket.Send(data, bypassFreezer)
+	// Connection timed out or something, reconnect.
+	if (!isConnected) then
+		table.insert(freezer, data)
+
+		if (SquishLogs.Server) then
+			SquishLogs.Socket.StartConnection()
+		end
+	end
+
+
+	// In some cases, the server may not be authed when logs are coming in.
+	// To prevent losing data, we add them to the freezer and send them off
+	// once auth is complete.
+	if (!SquishLogs.Core.IsAuthed and !bypassFreezer) then
+		table.insert(freezer, data)
+		return
+	end
+
+	SquishLogs.Socket.Connection:write(util.TableToJSON(data))
+
+	hook.Run('SquishLogs:Send', data)
 end

@@ -38,7 +38,6 @@ hook.Add("InitPostEntity", "SquishLogs:Start", function()
             end
 
             if (!(SquishLogs.Info.Version == body)) then
-                print('body', body)
                 SquishLogs.Info.LatestVersion = body
             end
         end)
