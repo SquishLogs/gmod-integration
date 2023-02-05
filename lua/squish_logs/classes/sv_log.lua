@@ -3,19 +3,21 @@ SquishLog = {}
 SquishLog.__index = SquishLog
 SquishLog.category = "Other"
 SquishLog.log = {}
-SquishLog._color = NULL
+SquishLog._color = nil
+SquishLog._meta = nil
 
 function SquishLog:New()
     local tbl = setmetatable({}, SquishLog)
     tbl.category = "Other"
     tbl.log = {}
-    tbl._color = NULL
+    tbl._color = nil
+    tbl._meta = nil
     
     return tbl
 end
 
 function SquishLog:formatColor(color)
-    if (!IsColor(color)) then return NULL end
+    if (!IsColor(color)) then return nil end
 
     return color.r .. ',' .. color.g .. ',' .. color.b
 end
@@ -60,21 +62,28 @@ function SquishLog:AddFragment(fragment)
             type = "text",
             data = {
                 text = fragment,
-                color = SquishLog:formatColor(self._color)
+                color = SquishLog:formatColor(self._color),
+                meta = self._meta and table.Copy(self._meta) or NULL
             }
         }
     else
         print("[Squish Logs]", "Log received bad data. Aborting.", fragType)
-        return
+        return self
     end
 
     table.insert(self.log, data)
     self._color = nil;
+    self._meta = nil;
 
     return self
 end
 function SquishLog:SetFragmentColor(color)
     self._color = color
+
+    return self
+end
+function SquishLog:SetFragmentMeta(meta)
+    self._meta = meta
 
     return self
 end
