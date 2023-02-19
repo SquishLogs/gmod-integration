@@ -64,6 +64,6 @@ return {
     ["crack_attempt"] = " attempted to crack a vault but failed",
 
     --Sandbox
-    ["spawn"] = " spawned "
+    ["spawn"] = " spawned ",
     ["spawn"] = " used "
 }
