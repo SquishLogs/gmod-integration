@@ -56,7 +56,7 @@ return {
     ["dmg_from"] = " damage from ",
     ["weap_attempt"] = " attempted to pick up weapon ",
     ["item_attempt"] = " attempted to pick up item ",
-    ["said"] = " said ",
+    ["said"] = ' said "',
 
     --pVault
     ["money_clean"] = " cleaned money for the amount of ",
