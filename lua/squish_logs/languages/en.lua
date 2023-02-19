@@ -6,7 +6,7 @@ return {
     ["was_deleted"] = " was deleted",
     ["usergroup_changed"] = " has had their user group changed from ",
     ["kick"] = "kicked ",
-    ["for"] = "for ",
+    ["for"] = " for ",
     ["banned"] = "banned ",
     ["length"] = " at a length of ",
     ["console"] = "Console",
