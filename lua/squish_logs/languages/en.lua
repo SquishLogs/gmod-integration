@@ -65,4 +65,5 @@ return {
 
     --Sandbox
     ["spawn"] = " spawned "
+    ["spawn"] = " used "
 }
