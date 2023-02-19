@@ -18,6 +18,7 @@ return {
     ["cheque"] = "wrote a cheque for ",
     ["cheque_pick"] = " picked up a cheque from ",
     ["amount"] = " for the amount of ",
+    ["at_amount"] = " for the amount of ",
     ["command"] = " ran command  ",
     ["demote"] = " demoted ",
     ["door_pur"] = " purchased a door for ",
