@@ -1,2 +1,2 @@
---Available languages "en, ru"
+--Available languages "en"
 SquishLogs.Language = "en"
