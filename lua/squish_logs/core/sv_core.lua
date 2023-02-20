@@ -83,7 +83,6 @@ function SquishLogs.Core.SimpleLog(message, category)
         :Send()
 end
 
-local categoryCache = {}
 function SquishLogs.Core.GetCategory(name)
     for k, v in ipairs(SquishLogs.Server.log_categories) do
         if (v.name == name) then return v end
