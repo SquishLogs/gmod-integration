@@ -2,6 +2,9 @@ hook.Add('SquishLogs:Send', 'SquishLogs:Discord', function(data)
     if (!data or !(data.type == 'log')) then return end
     if (!SquishLogs.Server.discord_webhook) then return end
 
+    local category = SquishLogs.Core.GetCategory(data.category);
+    if (category and !tobool(category.setting_discord)) then return end
+
     if(!reqwest) then 
         if(!util.IsBinaryModuleInstalled("reqwest")) then
             print("reqwest is not installed! This module is required for discord webhooks!")

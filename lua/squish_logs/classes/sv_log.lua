@@ -33,7 +33,17 @@ function SquishLog:GetCategory()
 end
 
 // Log
-function SquishLog:AddFragment(fragment)
+function SquishLog:AddFragment(fragment, arg1, arg2)
+    local color = IsColor(arg1) and arg1 or (IsColor(arg2) and arg2 or false)
+    local meta = (istable(arg1) and !IsColor(arg1)) and arg1 or ((istable(arg2) and !IsColor(arg2)) and arg2 or false)
+
+    if (color) then
+        self:SetFragmentColor(color)
+    end
+    if (meta) then
+        self:SetFragmentMeta(meta)
+    end
+
     if (!fragment) then return self end
     
     local fragType = type(fragment)
@@ -77,15 +87,41 @@ function SquishLog:AddFragment(fragment)
 
     return self
 end
+function SquishLog:Add(fragment, arg1, arg2)
+    return self:AddFragment(fragment, arg1, arg2)
+end
+
 function SquishLog:SetFragmentColor(color)
     self._color = color
 
     return self
 end
+function SquishLog:SetColor(color)
+    return self:SetFragmentColor(color)
+end
+
 function SquishLog:SetFragmentMeta(meta)
-    self._meta = meta
+    local formatted = {};
+    for k, v in pairs(meta) do
+        // Already formatted correctly
+        if (
+            istable(v) and
+            v.title and
+            v.text
+        ) then table.insert(formatted, v) continue end
+
+        table.insert(formatted, {
+            title = k,
+            text = v
+        })
+    end
+
+    self._meta = formatted
 
     return self
+end
+function SquishLog:SetMeta(meta)
+    return self:SetFragmentMeta(meta)
 end
 
 // Send the log
