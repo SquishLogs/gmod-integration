@@ -101,7 +101,22 @@ function SquishLog:SetColor(color)
 end
 
 function SquishLog:SetFragmentMeta(meta)
-    self._meta = meta
+    local formatted = {};
+    for k, v in pairs(meta) do
+        // Already formatted correctly
+        if (
+            istable(v) and
+            v.title and
+            v.text
+        ) then table.insert(formatted, v) continue end
+
+        table.insert(formatted, {
+            title = k,
+            text = v
+        })
+    end
+
+    self._meta = formatted
 
     return self
 end
