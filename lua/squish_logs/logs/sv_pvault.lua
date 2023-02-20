@@ -1,3 +1,5 @@
+local colorGreen = Color(34,139,34)
+
 hook.Add("pVaultMoneyCleaned", "SquishLogs:Log:pVault:CleanMoney", function(ply, amount)
     SquishLog:New()
         :SetCategory("pVault | Money")
