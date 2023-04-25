@@ -2,6 +2,7 @@ SquishLogs = {}
 SquishLogs.Info = {}
 SquishLogs.Socket = {}
 SquishLogs.Core = {}
+SquishLogs.Language = {}
 
 SquishLogs.Info.Version = "1.1.1"
 SquishLogs.Info.Domain = "{{ community_domain }}"
