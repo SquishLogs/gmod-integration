@@ -57,8 +57,11 @@ function SquishLogs.Socket.StartConnection()
 	function SquishLogs.Socket.Connection:onDisconnected()
 		print("[Squish Logs]", "WebSocket disconnected")
 		isConnected = false
+		SquishLogs.Core.IsAuthed = false
 		//SquishLogs.Socket.StartConnection()
 	end
+
+	isConnected = true;
 
 	print("[Squish Logs]", "Attempting to connect to", SquishLogs.Server.socket.name)
 	SquishLogs.Socket.Connection:open()
